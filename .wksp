@@ -1,0 +1,10 @@
+scriptDir=$(dirname ${BASH_SOURCE[0]})
+source $scriptDir/../desk.master.sh
+# =========================================================================
+#
+# TeamCity Explorations
+#
+# Description:
+#
+# -------------------------------------------------------------------------
+initDesk ~/Projects/teamcity
