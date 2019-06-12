@@ -1,0 +1,26 @@
+version: '3'
+services:
+  teamcity-server:
+    image: 'jetbrains/teamcity-server'
+    ports:
+      - '8111:8111'
+    volumes:
+      - '../data/teamcity/datadir:/data/teamcity_server/datadir'
+      - '../data/teamcity/logs:/opt/teamcity/logs'
+    networks:
+      - teamcity
+
+  teamcity-agent:
+    depends_on:
+      - teamcity-server
+    image: 'jetbrains/teamcity-agent'
+    environment:
+      SERVER_URL: 'http://teamcity-server:8111'
+    volumes:
+      - '../data/teamcity_agents/default/conf:/data/teamcity_agent/conf'
+    networks:
+      - teamcity
+
+networks:
+  teamcity:
+    driver: 'bridge'
